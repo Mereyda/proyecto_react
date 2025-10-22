@@ -1,0 +1,28 @@
+import React from "react";
+import Inicio from "./pages/Inicio";
+import Productos from "./componentes/Productos";
+import ProductoDetalle from "./pages/DetalleProdutos";
+import Footer from "./componentes/Footer";
+import { Routes, Route } from "react-router-dom";
+import Header from "./componentes/Header";
+
+import Menu from "./pages/Menu";
+import Formulario from "./pages/Formulario";
+
+const App = () => {
+  return (
+    <div>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Inicio />} />
+        <Route path="/servicios" element={<Menu />} />
+        <Route path="/productos" element={<Productos />} />
+        <Route path="/productos/:id" element={<ProductoDetalle />} />
+        <Route path="/contacto" element={<Formulario />} />
+      </Routes>
+      <Footer />
+    </div>
+  );
+}
+
+export default App;
