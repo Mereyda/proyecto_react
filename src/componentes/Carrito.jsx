@@ -1,37 +1,29 @@
-import React from 'react';
+import { useContext } from "react";
+import { CarritoContext } from "../contex/CarritoContext";
 
-const Carrito = ({ carrito, setCarrito }) => {
-  const vaciarCarrito = () => {
-    setCarrito([]);
-  };
-
-  const total = carrito.reduce((sum, item) => sum + Number(item.precio), 0);
+const Carrito = () => {
+  const { carrito, eliminarDelCarrito } = useContext(CarritoContext);
 
   return (
     <div>
-      <hr />
-      <h2>Carrito de Compras</h2>
-      {carrito.length === 0 ? (
-        <p>El carrito está vacío</p>
-      ) : (
-        <>
-          {carrito.map((item) => (
-            <div key={item.id}>
-              {item.nombre} - ${Number(item.precio).toFixed(3)}
-            </div>
-          ))}
-
-          <div>
-            <hr />
-            Total: ${Number(total).toFixed(3)}
-          </div>
-
-          <button onClick={vaciarCarrito}>
-            Vaciar Carrito
-          </button>
-        </>
-      )}
+      <h2>Carrito</h2>
+      {carrito.map((producto, indice) => (
+        <div key={indice}>
+          <img
+            src={producto.image}
+            alt={producto.title}
+            height={80}
+            width={80}
+          />
+          <p>
+            {" "}
+            {producto.title} : {producto.price}${" "}
+          </p>
+          <button onClick={() => eliminarDelCarrito(indice)}>Eliminar</button>
+        </div>
+      ))}
     </div>
   );
-}
-export default Carrito
+};
+
+export default Carrito;

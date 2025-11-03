@@ -1,22 +1,50 @@
-import NavBar from "./NavBar"
+import Navbar from '../componentes/NavBar'
+import styles from '../componentes/Header.module.css';
+import BagIcon from '../assets/BagIcon';
+import { Link } from 'react-router-dom';
+import { useAuthContext } from '../contex/AuthContex';
 
-const Header = () => {
-    const estilo = {
-    backgroundColor: '#2eafc6ff',
-    color: '#0d0d10ff',
-    textAlign: 'center',
-    fontFamily: 'Poppins, sans-serif',
-  }
+// Se pide para la pre-entrega
+const Header = ({contadorEnCarrito = 1}) => {
+  const {usuario, logout} = useAuthContext();
+  const estaLogeado = !!usuario;
+
   return (
-
-      <div style={estilo}>
-        <NavBar/>
+    <header className={styles.header}>
+      {/* Seccion Izquierda: Logo */}
+      <div className={styles.logo}>
+        ONEPIECE
       </div>
- 
+      {/* Seccion Central: Componente NavBar */}
+      <div className={styles.navbarContainer}>
+        <Navbar />
+      </div>
+      {/* Seccion Derecha: Iconos */}
+      <div className={styles.iconsContainer}>
+        { estaLogeado ? 
+          <button onClick={logout} className={styles.login}>Cerrar Sesion </button> 
+          :
+          <Link to="/login">
+            <button className={styles.login}>Ingresá</button>
+          </Link>
+        }
+        
+        {/* Icono de Carrito con Contador */}
+        <div className={styles.iconoDeCarrito}>
+          <Link to="/carrito">
+          <BagIcon className={styles.icono} />
+          {/* Renderiza el contador solo si es mayor que 0 */}
+          {contadorEnCarrito > 0 && (
+            <span className={styles.contadorDeCarrito}>
+              {contadorEnCarrito}
+            </span>
+          )}
+          </Link>
+          
+        </div>
+      </div>
+    </header>   
+  );
+};
 
-
-
-  )
-}
-
-export default Header
+export default Header;
