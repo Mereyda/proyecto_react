@@ -1,13 +1,20 @@
+
+import React, { useContext } from "react";
 import Navbar from '../componentes/NavBar'
 import styles from '../componentes/Header.module.css';
 import BagIcon from '../assets/BagIcon';
 import { Link } from 'react-router-dom';
 import { useAuthContext } from '../contex/AuthContex';
+import { CarritoContext } from '../contex/CarritoContext';
+
+
 
 // Se pide para la pre-entrega
-const Header = ({contadorEnCarrito = 1}) => {
+const Header = () => {
+  const { carrito } = useContext(CarritoContext);
   const {usuario, logout} = useAuthContext();
   const estaLogeado = !!usuario;
+  const contadorEnCarrito = carrito.length;
 
   return (
     <header className={styles.header}>

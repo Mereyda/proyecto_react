@@ -6,14 +6,17 @@ import {BrowserRouter, BrowserRouter as Router} from 'react-router-dom'
 
 import { CarritoProvider } from "./contex/CarritoContext.jsx";
 import { AuthProvider } from './contex/AuthContex.jsx'
+import { ProductoProvider } from './contex/ProductoContext.jsx'; 
 
 createRoot(document.getElementById('root')).render(
     <StrictMode>
       <BrowserRouter>
         <AuthProvider>
-        <CarritoProvider>
-          <App />
-        </CarritoProvider>
+          <ProductoProvider>
+            <CarritoProvider>
+              <App />
+            </CarritoProvider>
+          </ProductoProvider>
         </AuthProvider>
       </BrowserRouter>
     </StrictMode>

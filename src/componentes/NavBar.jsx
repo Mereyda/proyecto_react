@@ -12,7 +12,7 @@ const NavBar = () => {
           <Link to="/">Inicio</Link>
           <Link to="/servicios">Menu</Link>
           <Link to="/productos">Productos</Link>
-          <Link to="/contacto">Formulario</Link>
+          <Link to="/contacto">Formulario de contacto</Link>
           {esAdmin && (
             <Link to="/admin" >
               Admin

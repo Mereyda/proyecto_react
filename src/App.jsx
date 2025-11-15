@@ -8,7 +8,7 @@ import Header from "./componentes/Header";
 import Carrito from "./componentes/Carrito";
 
 import Menu from "./pages/Menu";
-import Formulario from "./pages/Formulario";
+import Formulario from "./componentes/Formulario";
 import RutaProtegida from "./componentes/Rutaprotegida";
 import Admin from "./componentes/Admin";
 import Login from "./pages/Login";
