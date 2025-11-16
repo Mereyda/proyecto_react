@@ -1,17 +1,16 @@
-
 import { createContext, useState } from "react";
-
+// Crear el contexto
 export const CarritoContext = createContext();
-
+// Proveedor del contexto
 export const CarritoProvider = ({ children }) => {
   const [carrito, setCarrito] = useState([]);
 
   const agregarAlCarrito = (producto) => {
     setCarrito([...carrito, producto]);
-    alert(`Producto ${producto.nombre} agregado al carrito`);
   };
-
-   const eliminarDelCarrito = (indiceAEliminar) => {
+  // Usamos filter() para crear un nuevo array que excluye el elemento
+  // con el índice dado.
+  const eliminarDelCarrito = (indiceAEliminar) => {
     setCarrito(carrito.filter((_, indice) => indice !== indiceAEliminar));
   };
 
@@ -21,10 +20,7 @@ export const CarritoProvider = ({ children }) => {
 
   return (
     <CarritoContext.Provider
-      value={{ carrito,
-       agregarAlCarrito,
-      eliminarDelCarrito, 
-      vaciarCarrito }}
+      value={{ carrito, agregarAlCarrito, eliminarDelCarrito, vaciarCarrito }}
     >
       {children}
     </CarritoContext.Provider>

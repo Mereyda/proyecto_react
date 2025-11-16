@@ -1,27 +1,12 @@
 import { useContext } from "react";
-import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { CarritoContext } from "../contex/CarritoContext";
-// Se pide para la pre-entrega
+import { useProductosContext } from "../contex/ProductosContext"; 
+
 const Productos = () => {
-  const [productos, setProductos] = useState([]);
-  const [cargando, setCargando] = useState(true);
-  const [error, setError] = useState(null);
-
-  // Usar el contexto
+  // Usamos los contextos
+  const { productos, cargando, error } = useProductosContext();
   const { agregarAlCarrito } = useContext(CarritoContext);
-
-  //  const URL = "https://fakestoreapi.com/products";
-  const URL = 'https://68d5d31de29051d1c0afa93e.mockapi.io/productos';
-
-
-  useEffect(() => {
-    fetch(URL)
-      .then((respuesta) => respuesta.json())
-      .then((datos) => setProductos(datos))
-      .catch((error) => setError("Error al cargar productos"))
-      .finally(() => setCargando(false));
-  }, []);
 
   if (cargando) return "Cargando productos...";
   if (error) return error;
@@ -32,8 +17,8 @@ const Productos = () => {
       <ul>
         {productos.map((producto) => (
           <li key={producto.id}>
-            {producto.title} : {producto.price}$
-            <img src={producto.image} height={80} width={80} />
+            {producto.nombre} : {producto.precio}$
+            <img src={producto.imagen} height={80} width={80} />
             <button onClick={() => agregarAlCarrito(producto)}>Agregar</button>
             <Link to={`/productos/${producto.id}`}>Detalles</Link>
           </li>

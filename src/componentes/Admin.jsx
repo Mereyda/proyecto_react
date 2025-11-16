@@ -6,7 +6,7 @@ const Admin = () => {
     <div>
       <h1> Gestion de productos</h1>
       < GestionProductos />
-      < FormProducto />
+
     </div>
   )
 }

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import FormProducto from "./FormProducto";
 import EditarProducto from "./EditarProducto";
-// import styles from './GestionProducto.module.css';
+import styles from './GestionProducto.module.css';
 import CirclePlus from "../assets/CirclePlus";
 
 const GestionProductos = () => {
@@ -9,6 +9,7 @@ const GestionProductos = () => {
   const [productoSeleccionado, setProductoSeleccionado] = useState(null);
   const [cargando, setCargando] = useState(true);
   const API = "https://6912508752a60f10c82151a8.mockapi.io/productos";
+  // const API = "https://68d5d31de29051d1c0afa93e.mockapi.io/productos";
   
 
   // Cargar productos al montar el componente
