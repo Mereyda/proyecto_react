@@ -1,56 +1,78 @@
 
-import React, { useContext } from "react";
-import Navbar from '../componentes/NavBar'
+import React, { useContext, useState } from "react";
+import Navbar from '../componentes/NavBar';
 import styles from '../componentes/Header.module.css';
 import BagIcon from '../assets/BagIcon';
 import { Link } from 'react-router-dom';
 import { useAuthContext } from '../contex/AuthContex';
 import { CarritoContext } from '../contex/CarritoContext';
+import CodeCoffeeLogo from "../assets/CodeCofeeLogo";
 
-
-
-// Se pide para la pre-entrega
 const Header = () => {
   const { carrito } = useContext(CarritoContext);
-  const {usuario, logout} = useAuthContext();
+  const { usuario, logout } = useAuthContext();
   const estaLogeado = !!usuario;
   const contadorEnCarrito = carrito.length;
 
+  const [menuAbierto, setMenuAbierto] = useState(false);
+
+  const toggleMenu = () => {
+    setMenuAbierto(!menuAbierto);
+  };
+
   return (
     <header className={styles.header}>
-      {/* Seccion Izquierda: Logo */}
-      <div className={styles.logo}>
-        ONEPIECE
-      </div>
-      {/* Seccion Central: Componente NavBar */}
-      <div className={styles.navbarContainer}>
-        <Navbar />
-      </div>
-      {/* Seccion Derecha: Iconos */}
-      <div className={styles.iconsContainer}>
-        { estaLogeado ? 
-          <button onClick={logout} className={styles.login}>Cerrar Sesion </button> 
-          :
-          <Link to="/login">
-            <button className={styles.login}>Ingresá</button>
-          </Link>
-        }
-        
-        {/* Icono de Carrito con Contador */}
-        <div className={styles.iconoDeCarrito}>
-          <Link to="/carrito">
+
+  {/* CONTENEDOR PRINCIPAL EN DESKTOP */}
+  <div className={styles.headerMain}>
+    
+    {/* LOGO */}
+    <div className={styles.logo}>
+      <CodeCoffeeLogo />
+    </div>
+
+    {/* NAVBAR DESKTOP */}
+    <div className={styles.navbarDesktop}>
+      <Navbar />
+    </div>
+
+    {/* ICONOS A LA DERECHA */}
+    <div className={styles.iconsContainer}>
+      {estaLogeado ? (
+        <button onClick={logout} className={styles.login}>Cerrar Sesión</button>
+      ) : (
+        <Link to="/login">
+          <button className={styles.login}>Ingresá</button>
+        </Link>
+      )}
+
+      <div className={styles.iconoDeCarrito}>
+        <Link to="/carrito">
           <BagIcon className={styles.icono} />
-          {/* Renderiza el contador solo si es mayor que 0 */}
           {contadorEnCarrito > 0 && (
             <span className={styles.contadorDeCarrito}>
               {contadorEnCarrito}
             </span>
           )}
-          </Link>
-          
-        </div>
+        </Link>
       </div>
-    </header>   
+    </div>
+
+    {/* HAMBURGUESA SOLO MOBILE */}
+    <div className={styles.hamburger} onClick={toggleMenu}>
+      ☰
+    </div>
+
+  </div>
+
+  {/* NAVBAR MOBILE */}
+  <div className={`${styles.navbarMobile} ${menuAbierto ? styles.open : ""}`}>
+    <Navbar />
+  </div>
+
+</header>
+
+ 
   );
 };
 

@@ -1,60 +1,100 @@
+
+
+/* ======================= DESKTOP ======================= */
+
 .header {
-  display: flex;
-  justify-content: space-between; 
-  align-items: center; 
-  padding: 10px 40px;
-  border-bottom: 1px solid #eee;
+  background: #0A0014;
+  padding: 10px 20px;
+  border-bottom: 1px solid #222;
 }
 
+/* Línea principal: LOGO — NAVBAR — ICONOS */
+.headerMain {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+/* LOGO */
 .logo {
-  flex-basis: 20%; 
-  font-size: 24px;
-  font-weight: bold;
-  color: #333;
-}
-
-.navbarContainer {
-  flex-basis: 60%; 
-  text-align: center;
-}
-
-.iconsContainer {
-  flex-basis: 20%; 
   display: flex;
-  justify-content: flex-end; 
-  
+  align-items: center;
 }
 
+/* NAVBAR DESKTOP */
+.navbarDesktop {
+  display: flex;
+  margin-left: 40px;
+}
+
+/* ICONOS A LA DERECHA */
+.iconsContainer {
+  margin-left: auto; /* LOS EMPUJA A LA DERECHA */
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.login {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* Carrito */
 .iconoDeCarrito {
   position: relative;
-  cursor: pointer;
 }
 
 .contadorDeCarrito {
   position: absolute;
-  top: -8px; 
-  right: -10px; 
-  background-color: rgb(228, 42, 42);
+  top: -8px;
+  right: -10px;
+  background: red;
   color: white;
   border-radius: 50%;
   padding: 3px 6px;
   font-size: 11px;
-  font-weight: bold;
-  line-height: 1;
 }
 
-.icono {
-  font-size: 24px;
+/* Hamburguesa oculta en desktop */
+.hamburger {
+  display: none;
+  font-size: 30px;
   cursor: pointer;
-  margin: 0;
+  color: white;
+}
+.navbarMobile{
+  display: none;
 }
 
-.login {
-  font-family: "Lucida Console", Courier, monospace;
-  font-size: 14px;
-  border: none;
-  /* background-color: transparent; */
-  outline: none;
-  text-decoration: none;
-  margin: 5px 20px  0px;
+/* ======================= MOBILE ======================= */
+
+@media (max-width: 768px) {
+
+  .headerMain {
+    justify-content: space-between;
+  }
+
+  .navbarDesktop {
+    display: none; /* OCULTAR NAVBAR EN MOBILE */
+  }
+
+  .hamburger {
+    display: block; /* MOSTRAR HAMBURGUESA */
+  }
+
+  .navbarMobile {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 12px;
+  
+  }
+
+  .navbarMobile.open {
+    display: flex;
+  }
 }
