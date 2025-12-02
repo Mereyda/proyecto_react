@@ -22,6 +22,13 @@ const Login = () => {
 
   return (
     <>
+    <p style={{ textAlign: "center", color: "red" }}>
+  Para Probar <br />
+  Usuario: admin <br />
+  Password: 1234
+</p>
+
+  
       <form onSubmit={manejarSubmit}>
         <h3>Iniciar Sesion</h3>
         <label htmlFor=''>Usuario</label>

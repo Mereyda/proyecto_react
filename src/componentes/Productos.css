@@ -1,0 +1,83 @@
+/* 🎯 Contenedor del grid */
+.productos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+  margin-top: 20px;
+}
+
+/* 📦 Tarjeta */
+.producto-card {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.2s ease;
+}
+
+.producto-card:hover {
+  transform: scale(1.03);
+}
+
+/* 🖼 Imagen */
+.producto-img {
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
+}
+
+/* 🔍 Buscador */
+.buscador {
+  width: 100%;
+  max-width: 400px;
+  padding: 12px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+/* 🔘 Botón detalle */
+.btn-detalle {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 8px 16px;
+  background: #6b46c1;
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+.btn-detalle:hover {
+  background: #4c2c8b;
+}
+
+/* 📄 Paginación */
+.paginacion {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  align-items: center;
+}
+
+.paginacion button {
+  padding: 8px 16px;
+  background: #6b46c1;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.paginacion button:hover {
+  background: #4c2c8b;
+}
+
+.paginacion button:disabled {
+  background: #aaa;
+  cursor: not-allowed;
+}
