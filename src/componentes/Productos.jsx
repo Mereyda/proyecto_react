@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { useProductosContext } from "../contex/ProductosContext";
 import "./Productos.css";
 
+import { CarritoContext } from "../contex/CarritoContext";
+
 
 
 
@@ -12,6 +14,8 @@ import "./Productos.css";
 const Productos = () => {
   // Contexto
   const { productos, cargando, error } = useProductosContext();
+  const { agregarAlCarrito } = useContext(CarritoContext);
+
 
   // 🔍 Búsqueda
   const [busqueda, setBusqueda] = useState("");
@@ -37,57 +41,66 @@ const Productos = () => {
     productosFiltrados.length / productosPorPagina
   );
 
-  return (
-    <div styles={{ padding: "20px" }}>
+ return (
+  <div className="productos-container">
+    
+    {/* Buscador */}
+    <input
+      type="text"
+      placeholder="Buscar producto..."
+      value={busqueda}
+      onChange={(e) => setBusqueda(e.target.value)}
+      className="buscador"
+    />
 
-      {/* 🔍 Buscador */}
-      <input
-        type="text"
-        placeholder="Buscar producto..."
-        value={busqueda}
-        onChange={(e) => setBusqueda(e.target.value)}
-        className="buscador"
-      />
+    {/* Grid */}
+    <div className="productos-grid">
+      {productosPaginados.map((producto) => (
+        <div className="producto-card" key={producto.id}>
+          
+          <img
+            src={producto.imagen}
+            alt={producto.nombre}
+            className="producto-img"
+          />
 
-      {/* 🧩 GRID DE PRODUCTOS */}
-      <div className="productos-grid">
-        {productosPaginados.map((producto) => (
-          <div className="producto-card" key={producto.id}>
-            <img
-              src={producto.imagen}
-              alt={producto.nombre}
-              className="producto-img"
-            />
-            <h3>{producto.nombre}</h3>
-            <p>${producto.precio}</p>
+          <h3>{producto.nombre}</h3>
+          <p>${producto.precio}</p>
 
-            <Link to={`/productos/${producto.id}`} className="btn-detalle">
-              Ver detalle
-            </Link>
-          </div>
-        ))}
-      </div>
+          <Link to={`/productos/${producto.id}`} className="btn-detalle">
+            Ver detalle
+          </Link>
 
-      {/* 📄 Paginación */}
-      <div className="paginacion">
-        <button
-          onClick={() => setPagina(pagina - 1)}
-          disabled={pagina <= 1}
-        >
-          ◀ Anterior
-        </button>
-
-        <span>Página {pagina} de {totalPaginas}</span>
-
-        <button
-          onClick={() => setPagina(pagina + 1)}
-          disabled={pagina >= totalPaginas}
-        >
-          Siguiente ▶
-        </button>
-      </div>
+          {/* BOTÓN QUE FALTABA */}
+          <button
+            className="btn-agregar"
+            onClick={() => agregarAlCarrito(producto)}
+          >
+            Agregar al carrito
+          </button>
+        </div>
+      ))}
     </div>
-  );
-};
+
+    {/* Paginación */}
+    <div className="paginacion">
+      <button
+        onClick={() => setPagina(pagina - 1)}
+        disabled={pagina <= 1}
+      >
+        ◀ Anterior
+      </button>
+
+      <span>Página {pagina} de {totalPaginas}</span>
+
+      <button
+        onClick={() => setPagina(pagina + 1)}
+        disabled={pagina >= totalPaginas}
+      >
+        Siguiente ▶
+      </button>
+    </div>
+  </div>
+)};
 
 export default Productos;

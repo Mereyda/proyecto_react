@@ -81,3 +81,18 @@
   background: #aaa;
   cursor: not-allowed;
 }
+.btn-agregar {
+  margin-top: 10px;
+  padding: 8px 12px;
+  background-color: #6c3df5;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: 0.2s;
+}
+
+.btn-agregar:hover {
+  background-color: #5427d8;
+}
